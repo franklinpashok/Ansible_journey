@@ -1,0 +1,13 @@
+Open Git Bash on the PC
+go to the directory or folder from where the file you want to upload to repo
+cd Ansible-Demo-exercises/
+# to add all files to the git to push to repo
+git add .
+#Will show which files are to be added
+git status
+# use this to add a comment
+git commit -m 'first commit'
+#get the url from the github from the repo where you want to upload
+git remote add origin 'https://github.com/franklinpashok/Ansible_journey.git'
+# use git push to push the file
+git push -u origin master
