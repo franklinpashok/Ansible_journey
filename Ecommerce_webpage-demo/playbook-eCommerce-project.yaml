@@ -1,0 +1,33 @@
+-
+  name: 'ecommerce website deploy'
+  hosts: all
+  tasks:
+      - name: 'Install firewalld and start the service'
+        yum:
+          name: firewalld
+          state: latest
+      - name: 'start the firewalld service and enable'
+        service: 
+          name: firewalld
+          state: started
+          enabled: yes
+      - name: 'Install Maria DB Server'
+        yum:
+          name: mariadb-server
+      - name: 'start the mariaDB service and enable'
+        service: 
+          name: mariadb
+          state: started
+          enabled: yes
+      - name: 'add rule in firewalld to allow DB traffic'
+        ansible.posix.firewalld:
+          zone: public
+          port: 3306/tcp
+          permanent: yes
+          state: enabled
+      - name: 'start the firewalld service and enable'
+        service: 
+          name: firewalld
+          state: restarted
+      
+          

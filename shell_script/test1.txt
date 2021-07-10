@@ -1,0 +1,2 @@
+this is the newtest file to learn EOF
+also newtest file to learn SED

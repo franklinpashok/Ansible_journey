@@ -1,0 +1,12 @@
+https://linuxhint.com/what-is-cat-eof-bash-script/
+https://linuxhint.com/50_sed_command_examples/
+
+# SED Usage
+sed -i 's/test1/newtest/g' test1.txt
+
+#EOF Usage
+
+cat > <filename> << EOF
+content
+content
+EOF
