@@ -29,5 +29,17 @@
         service: 
           name: firewalld
           state: restarted
+      - name: 'Create a new database with name ecomdb'
+        community.mysql.mysql_db:
+          name: ecomdb
+          state: present
+      - name: 'create a DB user with name ecomuser'
+        community.mysql.mysql_user:
+          name: ecomuser
+          password: ecompassword
+          host: localhost
+          priv: '*.*:ALL'
+          state: present
+
       
           
