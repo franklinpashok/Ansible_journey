@@ -1,13 +1,39 @@
 Open Git Bash on the PC
 go to the directory or folder from where the file you want to upload to repo
-cd Ansible-Demo-exercises/
+for example - cd Ansible-Demo-exercises/
+
 # to add all files to the git to push to repo
 git add .
+
 #Will show which files are to be added
 git status
+
 # use this to add a comment
 git commit -m 'first commit'
+
 #get the url from the github from the repo where you want to upload
 git remote add origin 'https://github.com/franklinpashok/Ansible_journey.git'
+
 # use git push to push the file
 git push -u origin master
+
+==== first computer from where you push the files will use the master if you use the above commands, you can still change the name and create a new branch to be more specific
+ 
+# to create a new branch from a different computer 
+
+git checkout -b <branch name> ====== this will create a branch on the local computer, the files in this new computer will use the new branch === Use the below command to push the file to the repo on git hub remote branch with the same name
+
+git push -u origin <branchname>
+
+# to switch to another branch
+
+git checkout <branch name>
+
+# to delete a local branch
+
+git branch --delete <local branch name> = do not delete the local branch if remote branch is created usign this local branch
+
+# to delete a remote branch
+
+git fetch purne
+git push origin --delete --remote <branch name>
