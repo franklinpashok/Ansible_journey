@@ -29,6 +29,8 @@ git push -u origin <branchname>
 
 git checkout <branch name>
 
+git switch <branch name>
+
 # to delete a local branch
 
 git branch --delete <local branch name> = do not delete the local branch if remote branch is created usign this local branch
