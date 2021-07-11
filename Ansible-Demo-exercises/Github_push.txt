@@ -5,6 +5,8 @@ for example - cd Ansible-Demo-exercises/
 # to add all files to the git to push to repo
 git add .
 
+git add filename - to add a specific file
+
 #Will show which files are to be added
 git status
 
@@ -28,6 +30,8 @@ git push -u origin <branchname>
 # to switch to another branch
 
 git checkout <branch name>
+
+git switch <branch name>
 
 # to delete a local branch
 
