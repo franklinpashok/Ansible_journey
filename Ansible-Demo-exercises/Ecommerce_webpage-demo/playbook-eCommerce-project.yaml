@@ -1,0 +1,14 @@
+-
+  name: 'ecommerce website deploy'
+  hosts: all
+  tasks:
+      - name: 'Install firewalld and start the service'
+        yum:
+          name: firewalld
+          state: latest
+      - name: 'start the firewalld service'
+        command: 
+          argv: 
+            - sudo systemctl enable firewalld
+            - sudo service firewalld start
+        state: started
