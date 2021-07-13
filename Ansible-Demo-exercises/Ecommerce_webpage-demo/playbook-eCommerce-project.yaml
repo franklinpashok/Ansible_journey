@@ -6,9 +6,73 @@
         yum:
           name: firewalld
           state: latest
-      - name: 'start the firewalld service'
-        command: 
-          argv: 
-            - sudo systemctl enable firewalld
-            - sudo service firewalld start
-        state: started
+      - name: 'start the firewalld service and enable'
+        service: 
+          name: firewalld
+          state: started
+          enabled: yes
+      - name: 'Install Maria DB Server'
+        yum:
+          name: mariadb-server
+      - name: 'start the mariaDB service and enable'
+        service: 
+          name: mariadb
+          state: started
+          enabled: yes
+      - name: 'add rule in firewalld to allow DB traffic'
+        ansible.posix.firewalld:
+          zone: public
+          port: 3306/tcp
+          permanent: yes
+          state: enabled
+      - name: 'start the firewalld service and enable'
+        service: 
+          name: firewalld
+          state: restarted
+      - name: 'install pymysql as prerequiste'
+        yum:
+          name: python2-PyMySQL
+          state: present
+      - name: 'Create a new database with name ecomdb'
+        community.mysql.mysql_db:
+          name: ecomdb
+          state: present
+      - name: 'create a DB user with name ecomuser'
+        community.mysql.mysql_user:
+          name: ecomuser
+          password: ecompassword
+          host: localhost
+          priv: '*.*:ALL'
+          state: present
+      - name: 'create a script to create sample data'
+        copy:
+          dest: "/home/osboxes/playbook-project-ecommerceapp/db-local-script.sql
+          content: |
+           USE ecomdb; CREATE TABLE products (id mediumint(8) unsigned NOT NULL auto_increment,Name varchar(255) default NULL,Price varchar(255) default NULL, ImageUrl varchar(255) default NULL,PRIMARY KEY (id)) AUTO_INCREMENT=1;INSERT INTO products (Name,Price,ImageUrl) VALUES ("Laptop","100","c-1.png"),("Drone","200","c-2.png"),("VR","300","c-3.png"),("Tablet","50","c-5.png"),("Watch","90","c-6.png"),("Phone Covers","20","c-7.png"),("Phone","80","c-8.png"),("Laptop","150","c-4.png");
+      - name: 'Run the sql script'
+        ansible.builtin.script: /home/osboxes/playbook-project-ecommerceapp/db-local-script.sql
+      - name: 'install httpd web service'
+        yum:
+          name: 
+            - httpd
+            - php
+            - php-mysql
+          state: latest
+      - name: 'add rule in firewalld to allow webservice traffic'
+        ansible.posix.firewalld:
+          zone: public
+          port: 80/tcp
+          permanent: yes
+          state: enabled
+      - name: 'start the firewalld service and enable'
+        service: 
+          name: firewalld
+          state: restarted
+      - name: 'start and enable the services'
+        service: 
+          name: 
+           - httpd
+           - php
+           - php-mysql
+          state: started
+          enabled: yes

@@ -1,0 +1,2 @@
+1) ansible-vault - generally used for storaing password
+2) 
