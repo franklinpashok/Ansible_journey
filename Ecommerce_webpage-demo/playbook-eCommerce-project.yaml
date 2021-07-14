@@ -19,6 +19,8 @@
           name: mariadb
           state: started
           enabled: yes
+#      - name: 'install firewalld posix'
+#        command: 'ansible-galaxy collection install ansible.posix'
       - name: 'add rule in firewalld to allow DB traffic'
         ansible.posix.firewalld:
           zone: public
@@ -33,6 +35,12 @@
         yum:
           name: python2-PyMySQL
           state: present
+#      - name: 'install galaxy collection for mysql'
+#        command: 'ansible-galaxy collection install community.mysql'
+      - name: "Install ansible python3 mysql dependency"
+        yum:
+         name: python3-PyMySQL
+         state: latest
       - name: 'Create a new database with name ecomdb'
         community.mysql.mysql_db:
           name: ecomdb
@@ -46,19 +54,22 @@
           state: present
       - name: 'create a script to create sample data'
         copy:
-          dest: /home/osboxes/ansible_demo_exercise/playbook-project-ecommerceapp/db-local-script.sql
+          dest: /home/osboxes/ansible_demo_exercise/Ecommerce_webpage-demo/db-local-script.sql
           content: | 
                     USE ecomdb; 
                     CREATE TABLE products (id mediumint(8) unsigned NOT NULL auto_increment,Name varchar(255) default NULL,Price varchar(255) default NULL, ImageUrl varchar(255) default NULL,PRIMARY KEY (id)) AUTO_INCREMENT=1;
                     INSERT INTO products (Name,Price,ImageUrl) VALUES ("Laptop","100","c-1.png"),("Drone","200","c-2.png"),("VR","300","c-3.png"),("Tablet","50","c-5.png"),("Watch","90","c-6.png"),("Phone Covers","20","c-7.png"),("Phone","80","c-8.png"),("Laptop","150","c-4.png");
-      - name: 'Run the sql script'
-        ansible.builtin.script: /home/osboxes/ansible_demo_exercise/Ecommerce_webpage-demo/db-local-script.sql
+      - name: 'create tables and sample data'
+        community.mysql.mysql_db:
+          name: ecomdb
+          state: present
+          target: /home/osboxes/ansible_demo_exercise/Ecommerce_webpage-demo/db-local-script.sql
       - name: 'install httpd web service'
         yum:
           name: 
             - httpd
             - php
-            - php-mysql
+            - php-mysqlnd
           state: latest
       - name: 'add rule in firewalld to allow webservice traffic'
         ansible.posix.firewalld:
@@ -72,8 +83,7 @@
           state: restarted
       - name: 'start and enable the services'
         service: 
-          name: 
-           - httpd
+          name: httpd
           state: started
           enabled: yes
       - name: 'download code from github'
