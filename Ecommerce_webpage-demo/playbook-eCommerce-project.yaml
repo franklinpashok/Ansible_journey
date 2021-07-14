@@ -25,10 +25,14 @@
           port: 3306/tcp
           permanent: yes
           state: enabled
-      - name: 'start the firewalld service and enable'
+      - name: 'Restart firewalld'
         service: 
           name: firewalld
           state: restarted
+      - name: 'install pymysql as prerequiste'
+        yum:
+          name: python2-PyMySQL
+          state: present
       - name: 'Create a new database with name ecomdb'
         community.mysql.mysql_db:
           name: ecomdb
@@ -40,6 +44,53 @@
           host: localhost
           priv: '*.*:ALL'
           state: present
-
-      
-          
+      - name: 'create a script to create sample data'
+        copy:
+          dest: /home/osboxes/ansible_demo_exercise/playbook-project-ecommerceapp/db-local-script.sql
+          content: | 
+                    USE ecomdb; 
+                    CREATE TABLE products (id mediumint(8) unsigned NOT NULL auto_increment,Name varchar(255) default NULL,Price varchar(255) default NULL, ImageUrl varchar(255) default NULL,PRIMARY KEY (id)) AUTO_INCREMENT=1;
+                    INSERT INTO products (Name,Price,ImageUrl) VALUES ("Laptop","100","c-1.png"),("Drone","200","c-2.png"),("VR","300","c-3.png"),("Tablet","50","c-5.png"),("Watch","90","c-6.png"),("Phone Covers","20","c-7.png"),("Phone","80","c-8.png"),("Laptop","150","c-4.png");
+      - name: 'Run the sql script'
+        ansible.builtin.script: /home/osboxes/ansible_demo_exercise/Ecommerce_webpage-demo/db-local-script.sql
+      - name: 'install httpd web service'
+        yum:
+          name: 
+            - httpd
+            - php
+            - php-mysql
+          state: latest
+      - name: 'add rule in firewalld to allow webservice traffic'
+        ansible.posix.firewalld:
+          zone: public
+          port: 80/tcp
+          permanent: yes
+          state: enabled
+      - name: 'restart start the firewalld'
+        service: 
+          name: firewalld
+          state: restarted
+      - name: 'start and enable the services'
+        service: 
+          name: 
+           - httpd
+          state: started
+          enabled: yes
+      - name: 'download code from github'
+        ansible.builtin.git:
+         repo: https://github.com/kodekloudhub/learning-app-ecommerce.git
+         dest: /var/www/html/
+      - name: 'replace the index.html with index.php'
+        replace:
+         path: /etc/httpd/conf/httpd.conf
+         regexp: 'index.html'
+         replace: "index.php"
+      - name: 'replace the IP in the index'
+        replace:
+         path: /var/www/html/index.php
+         regexp: '172.20.1.101'
+         replace: "localhost"
+      - name: 'restart httpd service'
+        service: 
+          name: httpd
+          state: restarted
