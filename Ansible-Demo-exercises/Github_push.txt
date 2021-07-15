@@ -49,6 +49,7 @@ also if you make changes to the files which connected to one branch and try to s
 
 git clone https://github.com/franklinpashok/Ansible_journey.git --branch homelaptoprepo --single-branch
 
-# command to fetch a branch from the repo
+# command to fetch a remote branch from the repo and create a local branch with the remote branch files
 
-git fetch origin homelaptoprepo:homelaptoprepo
+git fetch origin <remote repo name>:<localreportname> : better to keep the same name for both local and remote to avoid confusion
+
