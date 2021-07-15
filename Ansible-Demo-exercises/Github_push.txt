@@ -44,3 +44,11 @@ git push origin --delete --remote <branch name>
 NOTE: if you are using same path for two branches (first computer) where master and a new branch using the same path and directory. you switch to one branch and make changes to files, those changes wont take effect in another branch. so if you switch branchs you wont see the changes to the files. even its the same file you need to edit.
 
 also if you make changes to the files which connected to one branch and try to switch to another branch it wont allow you to switch untill you commit changes in the current branch
+
+# command to clone from a single branch
+
+git clone https://github.com/franklinpashok/Ansible_journey.git --branch homelaptoprepo --single-branch
+
+# command to fetch a branch from the repo
+
+git fetch origin homelaptoprepo:homelaptoprepo
