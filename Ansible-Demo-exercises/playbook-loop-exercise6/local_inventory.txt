@@ -1,0 +1,1 @@
+localhost ansible_connection=local car_model=TESLA country_name=Singapore title='cloud_enginner'

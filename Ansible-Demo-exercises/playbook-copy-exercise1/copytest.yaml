@@ -1,0 +1,8 @@
+-
+  name: Copy file to another server
+  hosts: all
+  tasks:
+    - name: copy files
+      copy: 
+        src: /home/osboxes/playbook-exercise1/copyfile.txt 
+        dest: /home/osboxes/copyfile.txt
