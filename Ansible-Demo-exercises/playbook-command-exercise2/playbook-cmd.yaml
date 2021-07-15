@@ -1,0 +1,6 @@
+-
+  name: run a commands on remote server
+  hosts: all
+  tasks:
+   - name: check the date
+     command: date +'%F''%n''%A'

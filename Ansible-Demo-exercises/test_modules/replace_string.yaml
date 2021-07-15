@@ -1,0 +1,9 @@
+-
+    name: 'replace a string'
+    hosts: all
+    tasks:
+      - name: 'replace a file'
+        replace:
+         path: /home/osboxes/ansible_demo_exercise/test_modules/string_replace.html
+         regexp: '172.20.1.101'
+         replace: "localhost"
