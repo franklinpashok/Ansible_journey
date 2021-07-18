@@ -1,0 +1,76 @@
+1) setup a lab for ansible - 
+	a) controller
+	b) target 1
+	c) target 2
+
+2) install ansible using "yum install ansible"
+
+3) ansible inventory - the list of servers managed by ansible controller.
+
+		ansible will connect to these servers using SSH or powershell - AGENTLESS
+
+4) YAML
+
+5) Ansible Playbooks - all playbooks in yaml format
+
+6) Modules
+
+	idempotency - example if the service is already started you dont need to start again, if its not start then you need to start. So when instructing using ansible playbooks you will only start if its not running, if its started it will do nothing
+
+	lineinfile - search for a line in a file and replace it or add if it doesnt exists
+7) ansible variables
+
+	jinja2 templating
+
+8) ansible conditions
+
+	conditions mainly used for different flavours of linux - like debian uses apt, but redhat uses yum in this situation need to use when condition
+
+9) ansible loops
+
+	with_items: or loops modules are the same. Loops is the latest module
+
+	with_lookup plugin - LOOKUP_PLUGINS ARE SCRIPTS
+
+10) ansible roles
+
+	roles assigned to servers - DB roles, web server role
+
+	roles are like a sequence of tasks used commonly - example installing a mysql server you can use the roles which are predefined - asible GALAXY
+
+	ansible-galaxy init mysql
+
+11) Linux Apache MariaDB Php  - LAMP Project
+	
+    Automate the deployment of this application using ansible
+
+
+12) Below reference
+
+	ansible-vault - generally used for storaing password
+	https://www.youtube.com/watch?v=HPzbHQqaafo
+	https://www.padok.fr/en/blog/ansible-codes-quality#Re-using_before_re-writing
+
+#to use the posix collections like ansible.posix.firewalld install the below role from galaxy
+	ansible-galaxy collection install ansible.posix
+
+# to use mysql community module install the below role
+	ansible-galaxy collection install community.mysql
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
