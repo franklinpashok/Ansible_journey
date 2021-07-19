@@ -6,3 +6,4 @@ git commit -m 'merged with homelaptop'
 git push -u origin officelaptop
 git switch master
 git push -u origin master
+git 
