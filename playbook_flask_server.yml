@@ -1,0 +1,7 @@
+-
+  name: Deploy a web application
+  hosts: flask_db_web_servers
+  roles:
+    - python
+    - deploy_db
+    - web_server

@@ -1,0 +1,6 @@
+-
+  name: 'ping test and add dns entries'
+  hosts: all
+  tasks:
+  - name: 'ping test'
+    ping:
