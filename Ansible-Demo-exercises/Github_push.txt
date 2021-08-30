@@ -2,6 +2,14 @@ Open Git Bash on the PC
 go to the directory or folder from where the file you want to upload to repo
 for example - cd Ansible-Demo-exercises/
 
+git config user.name
+git config email.name ''
+
+git config --global user.name 'franklinpashok'
+git config --global user.email 'franklinpashok@gmail.com'
+
+git init --initial-branch='stockmarket'
+
 # to add all files to the git to push to repo
 git add .
 
@@ -15,7 +23,7 @@ git commit -m 'first commit'
 git remote add origin 'https://github.com/franklinpashok/Ansible_journey.git'
 
 # use git push to push the file
-git push -u origin master
+git push -u origin master(or whatever is the initial branch)
 
 ==== first computer from where you push the files will use the master if you use the above commands, you can still change the name and create a new branch to be more specific
  
@@ -52,4 +60,25 @@ git clone https://github.com/franklinpashok/Ansible_journey.git --branch homelap
 # command to fetch a remote branch from the repo and create a local branch with the remote branch files
 
 git fetch origin <remote repo name>:<localreportname> : better to keep the same name for both local and remote to avoid confusion
+
+
+# to change the remote origina URL
+
+git remote set-url origin git@github.com:franklinpashok/mysql_role.git
+
+#to change the default repo name from master to custom
+
+git init --initial-branch=<custom name>
+
+For some git older version it wont allow --initial-branch=<branchname> - for that try git init and the use git checkout-b <custombranch name> before doing git add or git commit
+
+# if you want to use ssh to upload files to repor instead of https. 
+
+GEN SSH KEY
+
+ssh-keygen -t rsa -b 4096 -c "franklinpashok@gmail.com"
+
+use the default directory and give a passpharse
+add the .pub file content to your git hub account ssh keys. Then change setURL to ssh from the git repo instead of https
+
 
