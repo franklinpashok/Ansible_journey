@@ -53,3 +53,22 @@ git clone https://github.com/franklinpashok/Ansible_journey.git --branch homelap
 
 git fetch origin <remote repo name>:<localreportname> : better to keep the same name for both local and remote to avoid confusion
 
+
+# if you want to use ssh to upload files to repor instead of https. 
+
+GEN SSH KEY
+
+1) ssh-keygen -t rsa -b 4096 -c "franklinpashok@gmail.com" / ssh-keygen -t ed25519 -C "franklinpashok@gmail.com" (Use default folder)
+2) eval "$(ssh-agent -s)" (to start the ssh)
+3) ssh-add ~/.ssh/id_ed25519 (to add the private key)
+4) copy the public key *.pub file and create a new ssh key on github
+5) use a different branch name if you want to pull the remote report from the git repor
+
+	git fetch origin ELK_learning_homePC:ELK_OfficePC - if ELK_OfficePC branch already exists it wont allow to fetch.
+6) 
+
+
+
+use the default directory and give a passpharse
+add the .pub file content to your git hub account ssh keys. Then change setURL to ssh from the git repo instead of https
+

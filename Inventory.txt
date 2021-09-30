@@ -1,0 +1,33 @@
+===================OS TEMPLATES==========================
+
+192.168.123.155 - Centos Template
+
+192.168.123.160/192.168.56.12 - Debian Template
+
+===================ANSIBLE CENTOS CLUSTER=================
+
+192.168.123.156/192.168.56.6 - Ansible Controller
+
+192.168.123.157/192.168.56.7 - Ansible target1
+
+192.168.123.158/192.168.56.8 - Ansible target2
+
+=====================KUBERNETES UBUNTU CLUSTER=============
+
+192.168.56.2 - Kubemaster
+
+192.168.56.3 - Kubenode01
+
+192.168.56.4 - Kubenode02
+
+======================ANSIBLE DEBIAN CLUSTER===============
+
+192.168.123.161/192.168.56.9 - Ansible Controller2
+
+192.168.123.162/192.168.56.10 - Ansible target3
+
+192.168.123.163/192.168.56.11 - Ansible target4
+
+============================================================
+
+failed": true, "msg": "to use the 'ssh' connection type with passwords, you must install the sshpass program"}
