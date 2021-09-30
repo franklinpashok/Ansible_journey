@@ -60,3 +60,40 @@ git clone https://github.com/franklinpashok/Ansible_journey.git --branch homelap
 # command to fetch a remote branch from the repo and create a local branch with the remote branch files
 
 git fetch origin <remote repo name>:<localreportname> : better to keep the same name for both local and remote to avoid confusion
+
+NOTE: if you are using same path for two branches (first computer) where master and a new branch using the same path and directory. you switch to one branch and make changes to files, those changes wont take effect in another branch. so if you switch branchs you wont see the changes to the files. even its the same file you need to edit.
+
+also if you make changes to the files which connected to one branch and try to switch to another branch it wont allow you to switch untill you commit changes in the current branch
+
+# command to clone from a single branch
+
+git clone https://github.com/franklinpashok/Ansible_journey.git --branch homelaptoprepo --single-branch
+
+# command to fetch a remote branch from the repo and create a local branch with the remote branch files
+
+git fetch origin <remote repo name>:<localreportname> : better to keep the same name for both local and remote to avoid confusion
+
+
+# if you want to use ssh to upload files to repor instead of https. 
+
+GEN SSH KEY
+
+1) ssh-keygen -t rsa -b 4096 -c "franklinpashok@gmail.com" / ssh-keygen -t ed25519 -C "franklinpashok@gmail.com" (Use default folder)
+2) eval "$(ssh-agent -s)" (to start the ssh)
+3) ssh-add ~/.ssh/id_ed25519 (to add the private key)
+4) copy the public key *.pub file and create a new ssh key on github
+5) use a different branch name if you want to pull the remote report from the git repor
+
+	git fetch origin ELK_learning_homePC:ELK_OfficePC - if ELK_OfficePC branch already exists it wont allow to fetch.
+6) 
+
+
+
+use the default directory and give a passpharse
+add the .pub file content to your git hub account ssh keys. Then change setURL to ssh from the git repo instead of https
+
+if the online repo is ahead of not same as the localrepo 
+
+git merge origin <brnach name>
+
+git pull origin <branch name>
